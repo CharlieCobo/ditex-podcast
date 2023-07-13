@@ -13,7 +13,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: ['tsconfig.json', 'tailwind.config.js', 'vite.config.ts'],
+    project: ['tsconfig.json'],
     tsconfigRootDir: __dirname,
   },
   plugins: ['react-refresh'],
