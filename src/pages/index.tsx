@@ -1,4 +1,5 @@
 import { Budge } from '../components/Budge';
+import { GridCard } from '../components/GridCard';
 import { Search } from '../components/Search';
 import { usePodcast } from '../hooks/usePodcast';
 
@@ -11,11 +12,9 @@ const Home = () => {
         <Search placeholder="Search & Enter..." />
       </div>
 
-      <section className="mt-4 grid grid-cols-4 gap-4">
+      <section className="mt-4 grid grid-cols-4 gap-6">
         {data.map(podcast => (
-          <div key={podcast.id}>
-            <p>{podcast.author}</p>
-          </div>
+          <GridCard key={podcast.id} {...podcast} />
         ))}
       </section>
     </>
