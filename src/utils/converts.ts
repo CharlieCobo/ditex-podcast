@@ -14,6 +14,8 @@ export const convertTrackToApp = (track: ITrackResponse): ITrack => ({
   duration: converMillisToMin(Number(track.trackTimeMillis)),
   id: track.trackId,
   name: track.trackName.replace(/w\//g, '-'),
+  audio: track.episodeUrl,
+  description: track.description,
 });
 
 export const converMillisToMin = (timeMillis: number) => {

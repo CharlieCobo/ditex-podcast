@@ -14,6 +14,7 @@ interface IState {
 }
 
 export const useEpisodes = ({ id }: Props) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<IState>({
     lastFetchTime: 0,
     count: 0,
@@ -21,6 +22,7 @@ export const useEpisodes = ({ id }: Props) => {
   });
 
   const getEpisodesById = async (id: string) => {
+    setIsLoading(true);
     const cacheData = localStorage.getItem(id);
     let cacheFormatted: IState = {
       count: 0,
@@ -37,6 +39,7 @@ export const useEpisodes = ({ id }: Props) => {
 
       if (!isExpired && cacheFormatted.data) {
         setData(cacheFormatted);
+        setIsLoading(false);
         return;
       }
 
@@ -58,8 +61,10 @@ export const useEpisodes = ({ id }: Props) => {
 
       setData(formatData);
       localStorage.setItem(`${id}`, JSON.stringify(formatData));
+      setIsLoading(false);
     } catch (error) {
       console.error('Error al obtener los datos:', error);
+      setIsLoading(false);
     }
   };
   useEffect(() => {
@@ -68,5 +73,6 @@ export const useEpisodes = ({ id }: Props) => {
 
   return {
     ...data,
+    isLoading,
   };
 };

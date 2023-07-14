@@ -3,4 +3,6 @@ export interface ITrack {
   name: string;
   date: string;
   duration: string;
+  description: string;
+  audio: string;
 }

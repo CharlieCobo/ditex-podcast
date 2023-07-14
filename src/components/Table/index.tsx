@@ -1,10 +1,9 @@
-import { useNavigate } from 'react-router-dom';
-import { ITrack } from '../../interfaces';
+import { ITrack, PropsHandleNavigate } from '../../interfaces';
 import { changeOrder } from '../../utils';
 
 interface Props {
   data: ITrack[];
-  handleNavigation: (episodeId: string) => void;
+  handleNavigation: (args: PropsHandleNavigate) => void;
   title?: string;
 }
 
@@ -16,7 +15,7 @@ export const Table = ({ data, handleNavigation, title }: Props) => {
   }
 
   const headers = changeOrder({
-    incoming: Object.keys(data[0]).filter(item => item !== 'id'),
+    incoming: Object.keys(data[0]).filter(item => !['id', 'audio', 'description'].includes(item)),
     order: ['name', 'date', 'duration'],
   });
 
@@ -46,7 +45,10 @@ export const Table = ({ data, handleNavigation, title }: Props) => {
                   onClick={() => {
                     if (header !== 'name') return;
 
-                    handleNavigation(track.id);
+                    handleNavigation({
+                      episodeId: track.id,
+                      episode: track,
+                    });
                   }}
                 >
                   {track[header as T]}

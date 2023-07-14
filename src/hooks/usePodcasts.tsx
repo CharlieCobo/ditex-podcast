@@ -6,8 +6,10 @@ import { convertPodcastToApp } from '../utils/converts';
 
 export const usePodcasts = () => {
   const [data, setData] = useState<IPodcast[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getAllPodcast = async () => {
+    setIsLoading(true);
     const lastFetchTime = Number(localStorage.getItem('lastFetchTime') ?? 0);
     const storedData = localStorage.getItem('podcasts');
 
@@ -17,6 +19,7 @@ export const usePodcasts = () => {
 
       if (!isExpired && storedData) {
         setData(JSON.parse(storedData) as IPodcast[]);
+        setIsLoading(false);
         return;
       }
 
@@ -28,8 +31,10 @@ export const usePodcasts = () => {
         setData(podcasts);
         return;
       }
+      setIsLoading(false);
     } catch (error) {
       console.error('Error al obtener los datos:', error);
+      setIsLoading(false);
     }
   };
 
@@ -39,5 +44,6 @@ export const usePodcasts = () => {
 
   return {
     data,
+    isLoading,
   };
 };
