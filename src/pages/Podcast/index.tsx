@@ -1,7 +1,7 @@
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { DetailCard } from '../../components/DetailCard';
 import { Table } from '../../components/Table';
-import { useEpisodes } from '../../hooks/useEpisodes';
+import { useEpisodes, usePodcasts } from '../../hooks';
 import { PropsHandleNavigate } from '../../interfaces';
 
 const PodcastDetail = () => {
@@ -17,18 +17,27 @@ const PodcastDetail = () => {
       },
     });
 
-  const { count, data, isLoading } = useEpisodes({ id: podcastId ?? '' });
+  const { count, data } = useEpisodes({ id: podcastId ?? '' });
+  const { data: podcasts } = usePodcasts();
+
+  let podcast = state;
+
+  if (!state) {
+    podcast = podcasts.find(podcast => podcast.id === podcastId);
+  }
+
+  if (!podcast) return <h1>The podcast you are looking for has not been found</h1>;
 
   return (
     <div className="flex flex-row gap-24 w-full">
-      <DetailCard {...state} />
+      <DetailCard {...podcast} />
 
       <section className="flex flex-1 flex-col gap-5">
         <div className="bg-white px-5 py-3 border rounded shadow">
           <h1 className="font-bold text-3xl">Episodes: {count}</h1>
         </div>
         <div className="bg-white flex-1 px-5 py-3 border rounded shadow">
-          {isLoading ? <p>Loading...</p> : <Table data={data} handleNavigation={handleNavigate} />}
+          <Table data={data} handleNavigation={handleNavigate} />
         </div>
       </section>
     </div>

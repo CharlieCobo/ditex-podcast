@@ -39,7 +39,7 @@ export const DetailCard = ({ author, avatar, name, summary, clickeable }: Props)
 
       <div>
         <p className="font-bold">Description:</p>
-        <p className="font-light leading-1">{summary}</p>
+        <p className="font-light leading-1 overflow-hidden whitespace-wrap text-ellipsis">{summary}</p>
       </div>
     </div>
   );

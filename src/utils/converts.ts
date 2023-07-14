@@ -12,7 +12,7 @@ export const convertPodcastToApp = (podcast: Entry): IPodcast => ({
 export const convertTrackToApp = (track: ITrackResponse): ITrack => ({
   date: format(new Date(track.releaseDate), 'dd/MM/yyyy'),
   duration: converMillisToMin(Number(track.trackTimeMillis)),
-  id: track.trackId,
+  id: String(track.trackId),
   name: track.trackName.replace(/w\//g, '-'),
   audio: track.episodeUrl,
   description: track.description,
