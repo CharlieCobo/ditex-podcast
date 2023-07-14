@@ -137,3 +137,11 @@ export enum Rel {
 export enum Type {
   TextHTML = 'text/html',
 }
+
+// ==== Track Interface ====
+export interface ITrackResponse {
+  trackId: string;
+  trackName: string;
+  releaseDate: string;
+  trackTimeMillis: string;
+}

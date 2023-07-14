@@ -3,4 +3,5 @@ export interface IPodcast {
   avatar: string;
   name: string;
   author: string;
+  summary: string;
 }

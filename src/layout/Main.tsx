@@ -5,5 +5,5 @@ interface Props {
 }
 
 export const Main = ({ children }: Props) => {
-  return <main className="p-4 bg-background flex flex-1 flex-col min-h-full">{children}</main>;
+  return <main className="p-4 bg-background flex flex-1 min-h-full">{children}</main>;
 };
