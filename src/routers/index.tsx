@@ -4,11 +4,13 @@ import { Root } from './Root';
 import Home from '../pages';
 import PodcastDetail from '../pages/Podcast';
 import Episode from '../pages/Podcast/Episode';
+import NotFound from '../pages/Error';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    errorElement: <NotFound />,
     children: [
       {
         path: '/',
