@@ -1,12 +1,11 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { IPodcast } from '../interfaces';
 import { http, validateExpiredDate } from '../utils';
 import { IPodcastResponse } from '../interfaces/responses.interface';
 import { convertPodcastToApp } from '../utils/converts';
-import { PodcastCtx } from '../context/podcastCtx';
 
 export const usePodcasts = () => {
-  const { setLoading } = useContext(PodcastCtx);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState<IPodcast[]>([]);
 
   useEffect(() => {
@@ -31,6 +30,7 @@ export const usePodcasts = () => {
           localStorage.setItem('lastFetchTime', JSON.stringify(currentTime));
           localStorage.setItem('podcasts', JSON.stringify(podcasts));
           setData(podcasts);
+          setLoading(false);
           return;
         }
         setLoading(false);
@@ -44,5 +44,6 @@ export const usePodcasts = () => {
 
   return {
     data,
+    loading,
   };
 };

@@ -3,6 +3,7 @@ import { Budge } from '../components/Budge';
 import { GridCard } from '../components/GridCard';
 import { Search } from '../components/Search';
 import { usePodcasts } from '../hooks';
+import { Main, Navbar } from '../layout';
 
 const Home = () => {
   const [term, setTerm] = useState<string>('');
@@ -16,20 +17,24 @@ const Home = () => {
   }, [data, term]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => setTerm(e.target.value.toLowerCase());
-
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex justify-end items-center gap-3">
-        <Budge label={podcasts.length} />
-        <Search placeholder="Search & Enter..." onChange={handleSearch} value={term} />
-      </div>
+    <>
+      <Navbar />
+      <Main>
+        <div className="flex flex-col gap-4">
+          <div className="flex justify-end items-center gap-3">
+            <Budge label={podcasts.length} />
+            <Search placeholder="Search & Enter..." onChange={handleSearch} value={term} />
+          </div>
 
-      <section className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {podcasts.map(podcast => (
-          <GridCard key={podcast.id} {...podcast} />
-        ))}
-      </section>
-    </div>
+          <section className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {podcasts.map(podcast => (
+              <GridCard key={podcast.id} {...podcast} />
+            ))}
+          </section>
+        </div>
+      </Main>
+    </>
   );
 };
 

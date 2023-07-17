@@ -16,6 +16,6 @@ interface IChangeOrder {
 }
 
 export const changeOrder = ({ incoming, order }: IChangeOrder): string[] => {
-  const sortedIncoming = incoming.sort((current, next) => order.indexOf(current) - order.indexOf(next));
+  const sortedIncoming = [...incoming].sort((current, next) => order.indexOf(current) - order.indexOf(next));
   return sortedIncoming;
 };

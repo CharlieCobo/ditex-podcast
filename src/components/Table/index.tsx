@@ -11,7 +11,7 @@ type T = keyof ITrack;
 
 export const Table = ({ data, handleNavigation, title }: Props) => {
   if (!data || data.length === 0) {
-    return <p>There aren't episodes.</p>;
+    return <></>;
   }
 
   const headers = changeOrder({

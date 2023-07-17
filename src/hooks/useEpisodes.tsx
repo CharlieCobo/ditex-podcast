@@ -1,8 +1,8 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import { ITrack, ITrackResponse } from '../interfaces';
 import { convertTrackToApp, validateExpiredDate } from '../utils';
-import { PodcastCtx } from '../context/podcastCtx';
 
 interface Props {
   id: string;
@@ -15,7 +15,7 @@ interface IState {
 }
 
 export const useEpisodes = ({ id }: Props) => {
-  const { setLoading } = useContext(PodcastCtx);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState<IState>({
     lastFetchTime: 0,
     count: 0,
@@ -23,7 +23,7 @@ export const useEpisodes = ({ id }: Props) => {
   });
 
   useEffect(() => {
-    const getEpisodesById = async (id: string) => {
+    const getEpisodesById = async () => {
       setLoading(true);
       const cacheData = localStorage.getItem(id);
       let cacheFormatted: IState = {
@@ -70,10 +70,11 @@ export const useEpisodes = ({ id }: Props) => {
       }
     };
 
-    getEpisodesById(id);
+    getEpisodesById();
   }, [id, setLoading]);
 
   return {
     ...data,
+    loading,
   };
 };
