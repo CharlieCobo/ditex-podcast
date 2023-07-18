@@ -1,11 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Loading } from '../components/Loading';
+import Loading from '../components/Loading';
+import { NavbarProps } from './interfaces';
 
-interface Props {
-  loading?: boolean;
-}
-
-export const Navbar = ({ loading }: Props) => {
+export const Navbar = ({ loading }: NavbarProps) => {
   return (
     <header className="flex justify-between items-center px-4 py-3 border-b border-gray-300 shadow">
       <Link to="/">

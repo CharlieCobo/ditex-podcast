@@ -1,10 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { IPodcast } from '../../interfaces';
+import { DetailCardProps } from './interfaces';
 
-interface Props extends IPodcast {
-  clickeable?: boolean;
-}
-export const DetailCard = ({ author, avatar, name, summary, clickeable }: Props) => {
+const DetailCard = ({ author, avatar, name, summary, clickeable }: DetailCardProps) => {
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -39,8 +36,10 @@ export const DetailCard = ({ author, avatar, name, summary, clickeable }: Props)
 
       <div>
         <p className="font-bold">Description:</p>
-        <p className="font-light leading-1 overflow-hidden whitespace-wrap text-ellipsis">{summary}</p>
+        <p className="font-light leading-1 overflow-hidden whitespace-wrap text-ellipsis text-justify">{summary}</p>
       </div>
     </div>
   );
 };
+
+export default DetailCard;

@@ -1,15 +1,7 @@
-import { ITrack, PropsHandleNavigate } from '../../interfaces';
 import { changeOrder } from '../../utils';
+import { T, TableProps } from './interfaces';
 
-interface Props {
-  data: ITrack[];
-  handleNavigation: (args: PropsHandleNavigate) => void;
-  title?: string;
-}
-
-type T = keyof ITrack;
-
-export const Table = ({ data, handleNavigation, title }: Props) => {
+const Table = ({ data, handleNavigation, title }: TableProps) => {
   if (!data || data.length === 0) {
     return <></>;
   }
@@ -39,7 +31,7 @@ export const Table = ({ data, handleNavigation, title }: Props) => {
                 key={`${track.name} - ${header}`}
                 className={`${
                   header === 'name' ? 'cursor-pointer text-sky-600' : ''
-                } text-left max-w-[10rem] whitespace-nowrap overflow-hidden text-ellipsis`}
+                } text-justify max-w-[10rem] whitespace-nowrap overflow-hidden text-ellipsis py-2`}
               >
                 <p
                   onClick={() => {
@@ -61,3 +53,5 @@ export const Table = ({ data, handleNavigation, title }: Props) => {
     </table>
   );
 };
+
+export default Table;

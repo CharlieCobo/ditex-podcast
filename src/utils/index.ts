@@ -1,10 +1,7 @@
+import { IIsExpired } from './interfaces';
+
 export * from './converts';
 export * from './http';
-
-interface IIsExpired {
-  lastFetchTime: number;
-  currentTime: number;
-}
 
 // One Day in miliseconds = 24 * 60 * 60 * 1000
 export const validateExpiredDate = ({ currentTime, lastFetchTime }: IIsExpired) =>

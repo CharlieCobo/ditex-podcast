@@ -1,6 +1,6 @@
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { DetailCard } from '../../components/DetailCard';
-import { Table } from '../../components/Table';
+import DetailCard from '../../components/DetailCard';
+import Table from '../../components/Table';
 import { useEpisodes, usePodcasts } from '../../hooks';
 import { PropsHandleNavigate } from '../../interfaces';
 import { Main, Navbar } from '../../layout';

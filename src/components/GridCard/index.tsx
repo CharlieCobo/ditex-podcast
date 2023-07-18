@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { IPodcast } from '../../interfaces';
 
-export const GridCard = (podcast: IPodcast) => {
+const GridCard = (podcast: IPodcast) => {
   const { id, author, avatar, name } = podcast;
 
   const navigate = useNavigate();
@@ -24,3 +24,5 @@ export const GridCard = (podcast: IPodcast) => {
     </div>
   );
 };
+
+export default GridCard;

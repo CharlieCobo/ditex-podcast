@@ -1,5 +1,5 @@
 import { useLocation, useParams } from 'react-router-dom';
-import { DetailCard } from '../../components/DetailCard';
+import DetailCard from '../../components/DetailCard';
 import { useEpisodes, usePodcasts } from '../../hooks';
 import { Main, Navbar } from '../../layout';
 
