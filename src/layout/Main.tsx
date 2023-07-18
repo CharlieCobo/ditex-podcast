@@ -1,9 +1,5 @@
-import { ReactNode } from 'react';
+import { MainProps } from './interfaces';
 
-interface Props {
-  children: ReactNode;
-}
-
-export const Main = ({ children }: Props) => {
+export const Main = ({ children }: MainProps) => {
   return <main className="p-4 bg-background flex flex-1 min-h-full">{children}</main>;
 };

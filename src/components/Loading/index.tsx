@@ -1,8 +1,6 @@
-interface Props {
-  isLoading?: boolean;
-}
+import { LoadingProps } from './interfaces';
 
-export const Loading = ({ isLoading }: Props) => {
+const Loading = ({ isLoading }: LoadingProps) => {
   return (
     <span className={`${isLoading ? 'block' : 'hidden'} relative flex h-3 w-3`}>
       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
@@ -10,3 +8,5 @@ export const Loading = ({ isLoading }: Props) => {
     </span>
   );
 };
+
+export default Loading;

@@ -1,22 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { ITrack, ITrackResponse } from '../interfaces';
 import { convertTrackToApp, validateExpiredDate } from '../utils';
+import { UseEpisodeProps, UseEpisodeState } from './interfaces';
+import { ITrackResponse } from '../interfaces';
 
-interface Props {
-  id: string;
-}
-
-interface IState {
-  lastFetchTime: number;
-  count: number;
-  data: ITrack[];
-}
-
-export const useEpisodes = ({ id }: Props) => {
+export const useEpisodes = ({ id }: UseEpisodeProps) => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<IState>({
+  const [data, setData] = useState<UseEpisodeState>({
     lastFetchTime: 0,
     count: 0,
     data: [],
@@ -26,14 +17,14 @@ export const useEpisodes = ({ id }: Props) => {
     const getEpisodesById = async () => {
       setLoading(true);
       const cacheData = localStorage.getItem(id);
-      let cacheFormatted: IState = {
+      let cacheFormatted: UseEpisodeState = {
         count: 0,
         data: [],
         lastFetchTime: 0,
       };
 
       if (cacheData !== null) {
-        cacheFormatted = JSON.parse(cacheData) as IState;
+        cacheFormatted = JSON.parse(cacheData) as UseEpisodeState;
       }
       try {
         const currentTime = new Date().getTime();
