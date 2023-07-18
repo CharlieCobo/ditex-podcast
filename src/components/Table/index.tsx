@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { changeOrder } from '../../utils';
 import { SortingTypes, T, TableProps } from './interfaces';
 import { ArrowDownIcon, ArrowUpIcon } from '../Icons';
+import { ITrack } from '../../interfaces';
 
 const Table = ({ data, handleNavigation, title }: TableProps) => {
   const [orderBy, setOrderBy] = useState<SortingTypes>('name');
@@ -34,10 +35,39 @@ const Table = ({ data, handleNavigation, title }: TableProps) => {
     return '';
   };
 
-  const sortedData = [...data].sort((a, b) => {
-    const comparison = a[orderBy].localeCompare(b[orderBy]);
-    return orderAsc ? comparison : -comparison;
-  });
+  const compareDates = (dateA: string, dateB: string) => {
+    const [dayA, monthA, yearA] = dateA.split('/').map(Number);
+    const [dayB, monthB, yearB] = dateB.split('/').map(Number);
+
+    if (yearA !== yearB) {
+      return yearA - yearB;
+    }
+
+    if (monthA !== monthB) {
+      return monthA - monthB;
+    }
+
+    return dayA - dayB;
+  };
+
+  const compareValues = <T extends keyof ITrack>(key: T, order: 'asc' | 'desc') => {
+    return function (a: ITrack, b: ITrack) {
+      if (!Object.prototype.hasOwnProperty.call(a, key) || !Object.prototype.hasOwnProperty.call(b, key)) {
+        return 0;
+      }
+
+      let comparison = 0;
+      if (key === 'date') {
+        comparison = compareDates(a[key], b[key]);
+      } else {
+        comparison = a[key].localeCompare(b[key]);
+      }
+
+      return order === 'desc' ? -comparison : comparison;
+    };
+  };
+
+  const sortedData = [...data].sort(compareValues(orderBy, orderAsc ? 'asc' : 'desc'));
 
   return (
     <table className="w-full">
