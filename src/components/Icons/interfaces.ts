@@ -1,4 +1,5 @@
-export interface CloseIconProps {
+export interface IconProps {
+  className?: string;
   color?: string;
   size?: number;
 }

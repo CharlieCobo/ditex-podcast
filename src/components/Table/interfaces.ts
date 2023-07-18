@@ -7,3 +7,5 @@ export interface TableProps {
 }
 
 export type T = keyof ITrack;
+
+export type SortingTypes = 'name' | 'date' | 'duration';
